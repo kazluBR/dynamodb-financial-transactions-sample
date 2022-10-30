@@ -1,0 +1,20 @@
+handler: app/handlers/crud/handler.main
+memorySize: 256
+description: CRUD of statements and transactions
+timeout: 30
+
+environment:
+  FINANCIAL_TRANSACTIONS_TABLE_NAME: !Ref FinancialTransactionsTable
+
+url:
+  cors: true
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:DescribeTable
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:Scan
+    Resource:
+      - !GetAtt FinancialTransactionsTable.Arn

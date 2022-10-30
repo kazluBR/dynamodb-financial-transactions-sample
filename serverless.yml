@@ -1,0 +1,38 @@
+service: dynamodb-financial-transactions
+frameworkVersion: ">= 3 < 4"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: prod
+  architecture: arm64
+  stackTags:
+    service: ${self:service}
+  region: us-east-1
+  logRetentionInDays: 3
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+
+custom:
+  webpack:
+    keepOutputDirectory: true
+    includeModules: true
+    webpackConfig: ./webpack.config.js
+    forceExclude:
+      - aws-sdk
+    packagerOptions:
+      scripts:
+        - rm -rf node_modules/aws-sdk
+
+functions:
+  crud: ${file(infra/functions/crud.yml)}
+
+resources:
+  - ${file(infra/resources/dynamodb/financial-transactions-table.yml)}
+
+plugins:
+  - serverless-webpack
+  - serverless-iam-roles-per-function
+
+package:
+  individually: true
