@@ -6,16 +6,15 @@ export class DeleteTransaction {
       const params = { ...req.params, ...(req.query || {}) };
 
       let response = await Repository.getTransaction({ params });
-      if (response.Count == 0) {
+      if (!response) {
         return res.status(404).json({ response: null });
       }
 
-      let item = response.Items[0];
-      await Repository.deleteTransaction({ pk: item.pk, sk: item.sk });
+      await Repository.deleteTransaction({ pk: response.pk, sk: response.sk });
 
       return res.status(204).json({});
     } catch (error) {
-      return res.status(500).json({ errors: [error.message] });
+      return res.status(500).json({ response: null, errors: [error.message] });
     }
   };
 }

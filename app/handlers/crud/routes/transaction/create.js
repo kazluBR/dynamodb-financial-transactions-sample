@@ -3,11 +3,11 @@ import { Repository } from "@/common/repository";
 export class CreateTransaction {
   static main = async (req, res, next) => {
     try {
-      await Repository.createTransaction({ content: req.body });
+      let response = await Repository.createTransaction({ content: req.body });
 
-      return res.status(201).json({ message: "ok" });
+      return res.status(201).json({ response });
     } catch (error) {
-      return res.status(500).json({ errors: [error.message] });
+      return res.status(500).json({ response: null, errors: [error.message] });
     }
   };
 }

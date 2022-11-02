@@ -10,7 +10,8 @@ export class Repository {
       Key: { pk: "Statement", sk: `Statement#${params.id}` },
     };
 
-    return await docClient.get(props).promise();
+    let response = await docClient.get(props).promise();
+    return response.Item;
   };
 
   static createStatement = async ({ content }) => {
@@ -24,6 +25,7 @@ export class Repository {
     };
 
     await docClient.put(props).promise();
+    return props.Item;
   };
 
   static getTransaction = async ({ params }) => {
@@ -36,7 +38,11 @@ export class Repository {
       },
     };
 
-    return await docClient.query(props).promise();
+    let response = await docClient.query(props).promise();
+    if (response.Count == 0) {
+      return null;
+    }
+    return response.Items[0];
   };
 
   static createTransaction = async ({ content }) => {
@@ -53,6 +59,7 @@ export class Repository {
     };
 
     await docClient.put(props).promise();
+    return props.Item;
   };
 
   static deleteTransaction = async ({ pk, sk }) => {
