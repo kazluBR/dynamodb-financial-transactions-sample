@@ -16,5 +16,7 @@ iamRoleStatements:
       - dynamodb:GetItem
       - dynamodb:PutItem
       - dynamodb:Scan
+      - dynamodb:Query
+      - dynamodb:DeleteItem
     Resource:
       - !GetAtt FinancialTransactionsTable.Arn

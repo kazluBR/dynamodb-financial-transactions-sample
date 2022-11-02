@@ -31,8 +31,8 @@ export class Repository {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
       KeyConditionExpression: "pk = :pk AND begins_with ( sk , :sk )",
       ExpressionAttributeValues: {
-        ":pk": { S: `Transaction#${params.id}` },
-        ":sk": { S: "Statement" },
+        ":pk": `Transaction#${params.id}`,
+        ":sk": "Statement",
       },
     };
 
@@ -40,24 +40,28 @@ export class Repository {
   };
 
   static createTransaction = async ({ content }) => {
+    const date = moment.unix(content.datetime);
     const props = {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
       Item: {
         pk: `Transaction#${content.id}`,
         sk: `Statement#${content.statement}`,
         value: content.value,
-        datetime: content.datetime,
-        reference: moment(content.datetime).format("MM/YYYY"),
+        datetime: date.format("DD/MM/YYYY HH:mm:ss"),
+        reference: date.format("MM/YYYY"),
       },
     };
 
     await docClient.put(props).promise();
   };
 
-  static deleteTransaction = async ({ params }) => {
+  static deleteTransaction = async ({ pk, sk }) => {
     const props = {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
-      Key: { pk: `Transaction#${params.id}` },
+      Key: {
+        pk,
+        sk,
+      },
     };
 
     await docClient.delete(props).promise();
