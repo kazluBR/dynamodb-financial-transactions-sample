@@ -1,5 +1,6 @@
 import serverlessExpress from "@vendia/serverless-express";
 import express from "express";
+import NoAuth from "@/common/middleware";
 import ListStatements from "@/handlers/crud/routes/statement/list";
 import CreateStatement from "@/handlers/crud/routes/statement/create";
 import GetStatement from "@/handlers/crud/routes/statement/get";
@@ -22,12 +23,8 @@ const routes = [
   { path: "/transaction/:id", method: "delete", class: DeleteTransaction },
 ];
 
-const middleware = async (req, res, next) => {
-  next();
-};
-
 routes.forEach((route) => {
-  app[route.method].apply(app, [route.path, middleware, route.class["main"]]);
+  app[route.method].apply(app, [route.path, NoAuth, route.class["main"]]);
 });
 
 app.use(NotFound.main);
