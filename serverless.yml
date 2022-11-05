@@ -26,6 +26,7 @@ custom:
 
 functions:
   crud: ${file(infra/functions/crud.yml)}
+  report: ${file(infra/functions/report.yml)}
 
 resources:
   - ${file(infra/resources/dynamodb/financial-transactions-table.yml)}
