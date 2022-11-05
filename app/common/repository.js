@@ -21,6 +21,7 @@ export class Repository {
         pk: "Statement",
         sk: `Statement#${content.id}`,
         name: content.name,
+        type: content.type,
       },
     };
 
@@ -46,13 +47,14 @@ export class Repository {
   };
 
   static createTransaction = async ({ content }) => {
-    const date = moment.unix(content.datetime);
+    const date = moment(content.datetime);
     const props = {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
       Item: {
         pk: `Transaction#${content.id}`,
         sk: `Statement#${content.statement}`,
         value: content.value,
+        timestamp: moment(date).valueOf(),
         datetime: date.format("DD/MM/YYYY HH:mm:ss"),
         reference: date.format("MM/YYYY"),
       },

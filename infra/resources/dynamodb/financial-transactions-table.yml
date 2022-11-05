@@ -8,11 +8,30 @@ Resources:
           AttributeType: S
         - AttributeName: sk
           AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: N
+        - AttributeName: reference
+          AttributeType: S
       KeySchema:
         - AttributeName: pk
           KeyType: HASH
         - AttributeName: sk
           KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: timestamp-gsi
+          KeySchema:
+            - AttributeName: sk
+              KeyType: HASH
+            - AttributeName: timestamp
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: reference-gsi
+          KeySchema:
+            - AttributeName: reference
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
       BillingMode: PAY_PER_REQUEST
       PointInTimeRecoverySpecification:
         PointInTimeRecoveryEnabled: true
