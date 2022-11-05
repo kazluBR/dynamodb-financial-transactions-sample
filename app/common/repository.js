@@ -4,6 +4,19 @@ import moment from "moment";
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 export class Repository {
+  static getStatements = async () => {
+    const props = {
+      TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
+      KeyConditionExpression: "pk = :pk and begins_with(sk, :sk)",
+      ExpressionAttributeValues: {
+        ":pk": "Statement",
+        ":sk": "Statement#",
+      },
+    };
+
+    return await docClient.query(props).promise();
+  };
+
   static getStatement = async ({ params }) => {
     const props = {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
@@ -27,6 +40,18 @@ export class Repository {
 
     await docClient.put(props).promise();
     return props.Item;
+  };
+
+  static getTransactions = async () => {
+    const props = {
+      TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
+      FilterExpression: "begins_with(pk, :pk)",
+      ExpressionAttributeValues: {
+        ":pk": "Transaction#",
+      },
+    };
+
+    return await docClient.scan(props).promise();
   };
 
   static getTransaction = async ({ params }) => {
