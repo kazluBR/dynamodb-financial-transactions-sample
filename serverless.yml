@@ -12,6 +12,9 @@ provider:
   logRetentionInDays: 3
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+  apiGateway:
+    apiKeys:
+      - ${self:service}
 
 custom:
   webpack:
@@ -25,8 +28,7 @@ custom:
         - rm -rf node_modules/aws-sdk
 
 functions:
-  crud: ${file(infra/functions/crud.yml)}
-  report: ${file(infra/functions/report.yml)}
+  ws: ${file(infra/functions/ws.yml)}
 
 resources:
   - ${file(infra/resources/dynamodb/financial-transactions-table.yml)}

@@ -1,4 +1,4 @@
-handler: app/handlers/crud/handler.main
+handler: app/handlers/ws/handler.main
 memorySize: 256
 description: CRUD of statements and transactions
 timeout: 30
@@ -6,8 +6,17 @@ timeout: 30
 environment:
   FINANCIAL_TRANSACTIONS_TABLE_NAME: !Ref FinancialTransactionsTable
 
-url:
-  cors: true
+events:
+  - http:
+      path: /
+      method: any
+      private: true
+      cors: true
+  - http:
+      path: /{proxy+}
+      method: any
+      private: true
+      cors: true
 
 iamRoleStatements:
   - Effect: Allow
