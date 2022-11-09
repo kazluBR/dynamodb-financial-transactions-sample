@@ -100,6 +100,20 @@ export class Repository {
 
     await docClient.delete(props).promise();
   };
+
+  static getTransactionsByReference = async ({ params }) => {
+    const props = {
+      TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
+      IndexName: "reference-gsi",
+      KeyConditionExpression: "#reference = :reference",
+      ExpressionAttributeValues: {
+        ":reference": params.reference,
+      },
+      ExpressionAttributeNames: { "#reference": "reference" },
+    };
+
+    return await docClient.query(props).promise();
+  };
 }
 
 export default Repository;

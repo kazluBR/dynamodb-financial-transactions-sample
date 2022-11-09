@@ -29,3 +29,7 @@ iamRoleStatements:
       - dynamodb:DeleteItem
     Resource:
       - !GetAtt FinancialTransactionsTable.Arn
+      - !Join
+        - "/"
+        - - !GetAtt FinancialTransactionsTable.Arn
+          - "index/*"

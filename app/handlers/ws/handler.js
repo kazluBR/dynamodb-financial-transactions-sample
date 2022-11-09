@@ -8,6 +8,7 @@ import ListTransactions from "@/handlers/ws/routes/crud/transaction/list";
 import CreateTransaction from "@/handlers/ws/routes/crud/transaction/create";
 import GetTransaction from "@/handlers/ws/routes/crud/transaction/get";
 import DeleteTransaction from "@/handlers/ws/routes/crud/transaction/delete";
+import CashFlow from "@/handlers/ws/routes/reports/cashflow";
 import NotFound from "@/common/notfound";
 
 const app = express();
@@ -21,6 +22,7 @@ const routes = [
   { path: "/transaction/", method: "post", class: CreateTransaction },
   { path: "/transaction/:id", method: "get", class: GetTransaction },
   { path: "/transaction/:id", method: "delete", class: DeleteTransaction },
+  { path: "/cashflow/", method: "get", class: CashFlow },
 ];
 
 routes.forEach((route) => {
