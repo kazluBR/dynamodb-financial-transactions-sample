@@ -24,7 +24,6 @@ iamRoleStatements:
       - dynamodb:DescribeTable
       - dynamodb:GetItem
       - dynamodb:PutItem
-      - dynamodb:Scan
       - dynamodb:Query
       - dynamodb:DeleteItem
     Resource:

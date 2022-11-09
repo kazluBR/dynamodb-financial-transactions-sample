@@ -20,7 +20,7 @@ Resources:
       GlobalSecondaryIndexes:
         - IndexName: timestamp-gsi
           KeySchema:
-            - AttributeName: sk
+            - AttributeName: pk
               KeyType: HASH
             - AttributeName: timestamp
               KeyType: RANGE

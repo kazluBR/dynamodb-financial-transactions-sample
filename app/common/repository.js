@@ -46,31 +46,25 @@ export class Repository {
   static getTransactions = async () => {
     const props = {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
-      FilterExpression: "begins_with(pk, :pk)",
+      KeyConditionExpression: "pk = :pk and begins_with(sk, :sk)",
       ExpressionAttributeValues: {
-        ":pk": "Transaction#",
+        ":pk": "Transaction",
+        ":sk": "Transaction#",
       },
     };
 
-    let response = await docClient.scan(props).promise();
+    let response = await docClient.query(props).promise();
     return response.Items;
   };
 
   static getTransaction = async ({ params }) => {
     const props = {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
-      KeyConditionExpression: "pk = :pk AND begins_with ( sk , :sk )",
-      ExpressionAttributeValues: {
-        ":pk": `Transaction#${params.id}`,
-        ":sk": "Statement",
-      },
+      Key: { pk: "Transaction", sk: `Transaction#${params.id}` },
     };
 
-    let response = await docClient.query(props).promise();
-    if (response.Count == 0) {
-      return null;
-    }
-    return response.Items[0];
+    let response = await docClient.get(props).promise();
+    return response.Item;
   };
 
   static createTransaction = async ({ content }) => {
@@ -78,8 +72,9 @@ export class Repository {
     const props = {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
       Item: {
-        pk: `Transaction#${content.id}`,
-        sk: `Statement#${content.statement}`,
+        pk: "Transaction",
+        sk: `Transaction#${content.id}`,
+        statement: content.statement,
         value: content.value,
         timestamp: moment(date).valueOf(),
         datetime: date.format("DD/MM/YYYY HH:mm:ss"),
