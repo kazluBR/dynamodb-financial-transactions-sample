@@ -1,9 +1,12 @@
 import { Repository } from "@/common/repository";
+import Utils from "@/common/utils";
 
 export class ListStatements {
   static main = async (req, res, next) => {
     try {
-      let response = await Repository.getStatements();
+      let statements = await Repository.getStatements();
+
+      let response = Utils.getStatementsProcessed({ statements });
 
       return res.status(200).json({ response });
     } catch (error) {

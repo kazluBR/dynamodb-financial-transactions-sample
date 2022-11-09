@@ -14,7 +14,8 @@ export class Repository {
       },
     };
 
-    return await docClient.query(props).promise();
+    let response = await docClient.query(props).promise();
+    return response.Items;
   };
 
   static getStatement = async ({ params }) => {
@@ -51,7 +52,8 @@ export class Repository {
       },
     };
 
-    return await docClient.scan(props).promise();
+    let response = await docClient.scan(props).promise();
+    return response.Items;
   };
 
   static getTransaction = async ({ params }) => {
@@ -112,7 +114,8 @@ export class Repository {
       ExpressionAttributeNames: { "#reference": "reference" },
     };
 
-    return await docClient.query(props).promise();
+    let response = await docClient.query(props).promise();
+    return response.Items;
   };
 }
 

@@ -1,9 +1,17 @@
 import { Repository } from "@/common/repository";
+import Utils from "@/common/utils";
 
 export class ListTransactions {
   static main = async (req, res, next) => {
     try {
-      let response = await Repository.getTransactions();
+      let transactions = await Repository.getTransactions();
+
+      let statements = await Repository.getStatements();
+
+      let response = Utils.getTransactionsProcessed({
+        transactions,
+        statements,
+      });
 
       return res.status(200).json({ response });
     } catch (error) {
