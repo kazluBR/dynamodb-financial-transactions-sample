@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "invoke:ws": "npx sls invoke local -f ws --path app/handlers/ws/mocks/request.json"
+    "invoke:ws": "npx sls invoke local -f ws --path app/handlers/ws/mocks/request.json",
+    "invoke:load": "npx sls invoke local -f load-data"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
   "dependencies": {
     "@vendia/serverless-express": "^4.10.1",
     "express": "^4.18.2",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "moment-random": "^1.1.0",
+    "uuid": "^9.0.0"
   }
 }

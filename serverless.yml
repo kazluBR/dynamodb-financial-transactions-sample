@@ -29,6 +29,7 @@ custom:
 
 functions:
   ws: ${file(infra/functions/ws.yml)}
+  load-data: ${file(infra/functions/load-data.yml)}
 
 resources:
   - ${file(infra/resources/dynamodb/financial-transactions-table.yml)}

@@ -55,8 +55,8 @@ export class Utils {
 
   static getTransactionsSummary = ({ transactions, statements }) => {
     let response = {
-      credit: {},
-      debit: {},
+      income: {},
+      cost: {},
       summary: { result: 0, transactions: 0 },
     };
     transactions.forEach((transaction) => {
@@ -70,7 +70,7 @@ export class Utils {
         response[statement.type.toLowerCase()][statement.name] =
           transaction.value;
       }
-      if (statement.type == "CREDIT") {
+      if (statement.type == "INCOME") {
         response.summary.result += transaction.value;
       } else {
         response.summary.result -= transaction.value;
