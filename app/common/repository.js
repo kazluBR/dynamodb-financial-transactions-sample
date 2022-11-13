@@ -112,6 +112,25 @@ export class Repository {
     let response = await docClient.query(props).promise();
     return response.Items;
   };
+
+  static getTransactionsBetweenTimestamp = async ({ params }) => {
+    const start = moment(params.start, "DD-MM-YYYY");
+    const end = moment(params.end, "DD-MM-YYYY");
+    const props = {
+      TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
+      IndexName: "timestamp-gsi",
+      KeyConditionExpression: "pk = :pk and #timestamp between :start and :end",
+      ExpressionAttributeValues: {
+        ":pk": "Transaction",
+        ":start": moment(start).valueOf(),
+        ":end": moment(end).valueOf(),
+      },
+      ExpressionAttributeNames: { "#timestamp": "timestamp" },
+    };
+
+    let response = await docClient.query(props).promise();
+    return response.Items;
+  };
 }
 
 export default Repository;

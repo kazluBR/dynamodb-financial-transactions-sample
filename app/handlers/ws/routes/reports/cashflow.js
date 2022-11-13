@@ -5,7 +5,7 @@ export class CashFlow {
   static main = async (req, res, next) => {
     try {
       const params = { ...req.params, ...(req.query || {}) };
-      let transactions = await Repository.getTransactionsByReference({
+      let transactions = await Repository.getTransactionsBetweenTimestamp({
         params,
       });
 
