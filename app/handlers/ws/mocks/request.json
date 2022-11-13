@@ -1,0 +1,22 @@
+{
+  "resource": "/{proxy+}",
+  "path": "/summary",
+  "httpMethod": "GET",
+  "queryStringParameters": {
+      "reference": "10/2022"
+  },
+  "multiValueQueryStringParameters": {
+      "reference": [
+          "10/2022"
+      ]
+  },
+  "pathParameters": {
+    "proxy": "summary"
+  },
+  "requestContext": {
+      "resourcePath": "/{proxy+}",
+      "httpMethod": "GET",
+      "path": "/prod/summary"
+  },
+  "body": null
+}

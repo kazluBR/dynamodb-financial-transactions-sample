@@ -4,7 +4,8 @@
   "description": "AWS Black Belt - Database - Challenge 2022",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "invoke:ws": "npx sls invoke local -f ws --path app/handlers/ws/mocks/request.json"
   },
   "repository": {
     "type": "git",
