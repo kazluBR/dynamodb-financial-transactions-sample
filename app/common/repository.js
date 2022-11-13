@@ -115,7 +115,9 @@ export class Repository {
 
   static getTransactionsBetweenTimestamp = async ({ params }) => {
     const start = moment(params.start, "DD-MM-YYYY");
-    const end = moment(params.end, "DD-MM-YYYY");
+    const end = moment(params.end, "DD-MM-YYYY")
+      .add(1, "days")
+      .add(-1, "seconds");
     const props = {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
       IndexName: "timestamp-gsi",
