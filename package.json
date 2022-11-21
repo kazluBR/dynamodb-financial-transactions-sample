@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "invoke:ws": "npx sls invoke local -f ws --path app/handlers/ws/mocks/request.json",
-    "invoke:load": "npx sls invoke local -f load-data"
+    "invoke:load": "npx sls invoke local -f load-data --path app/handlers/load-data/mocks/request.json"
   },
   "repository": {
     "type": "git",

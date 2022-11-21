@@ -1,9 +1,10 @@
 handler: app/handlers/load-data/handler.main
 memorySize: 1024
 description: Populate dynamo table with statements and transactions
-timeout: 90
+timeout: 900
 
 environment:
+  INITIAL_DATE: "01/01/2020"
   FINANCIAL_TRANSACTIONS_TABLE_NAME: !Ref FinancialTransactionsTable
 
 url: true
