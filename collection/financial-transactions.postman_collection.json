@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "ec4b0271-3fcf-4996-8f8c-1621b9802e73",
+		"name": "Financial Transactions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24149835"
+	},
+	"item": [
+		{
+			"name": "Crud",
+			"item": [
+				{
+					"name": "Statement",
+					"item": [
+						{
+							"name": "Get Statements",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									}
+								],
+								"url": "{{WS_ENDPOINT}}/statement"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Income Statement",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": \"Credit Card\",\r\n    \"type\": \"INCOME\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{WS_ENDPOINT}}/statement"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Cost Statement",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"5\",\r\n    \"name\": \"Payroll\",\r\n    \"type\": \"COST\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{WS_ENDPOINT}}/statement"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Statement",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									}
+								],
+								"url": "{{WS_ENDPOINT}}/statement/1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Transaction",
+					"item": [
+						{
+							"name": "Get Transactions",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									}
+								],
+								"url": "{{WS_ENDPOINT}}/transaction"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Transaction",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"statement\": \"{{randomStatement}}\",\r\n    \"value\": {{$randomPrice}},\r\n    \"datetime\": \"{{randomDatetime}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{WS_ENDPOINT}}/transaction"
+							},
+							"response": []
+						},
+						{
+							"name": "Get Transaction",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									}
+								],
+								"url": "{{WS_ENDPOINT}}/transaction/4da1be0d-cdfa-4694-8333-78e14a417718"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Transaction",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									}
+								],
+								"url": "{{WS_ENDPOINT}}/transaction/e6961385-19f1-4463-8d89-4127547cd5a7"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Cash Flow",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{X_API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{WS_ENDPOINT}}/cashflow?start={{randomDateStart}}&end={{randomDateEnd}}",
+							"host": [
+								"{{WS_ENDPOINT}}"
+							],
+							"path": [
+								"cashflow"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "{{randomDateStart}}"
+								},
+								{
+									"key": "end",
+									"value": "{{randomDateEnd}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Summary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "{{X_API_KEY}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{WS_ENDPOINT}}/summary?reference={{randomReference}}",
+							"host": [
+								"{{WS_ENDPOINT}}"
+							],
+							"path": [
+								"summary"
+							],
+							"query": [
+								{
+									"key": "reference",
+									"value": "{{randomReference}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Load Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"statements\": [\r\n        { \r\n            \"id\": 1,\r\n            \"name\": \"Credit Card\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 2500,\r\n            \"range\": {\r\n                \"from\": 50,\r\n                \"to\": 5000\r\n            }\r\n        },\r\n        { \r\n            \"id\": 2,\r\n            \"name\": \"Pix\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 1000,\r\n            \"range\": {\r\n                \"from\": 100,\r\n                \"to\": 2000\r\n            }\r\n        },\r\n        { \r\n            \"id\": 3,\r\n            \"name\": \"Invoice\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 2000,\r\n            \"range\": {\r\n                \"from\": 500,\r\n                \"to\": 10000\r\n            }\r\n        },\r\n        { \r\n            \"id\": 4,\r\n            \"name\": \"Cash\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 500,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 200\r\n            }\r\n        },\r\n        { \r\n            \"id\": 5,\r\n            \"name\": \"Payroll\",\r\n            \"type\": \"COST\",\r\n            \"count\": 200,\r\n            \"range\": {\r\n                \"from\": 1000,\r\n                \"to\": 10000\r\n            }\r\n        },\r\n        { \r\n            \"id\": 6,\r\n            \"name\": \"Energy\",\r\n            \"type\": \"COST\",\r\n            \"count\": 50,\r\n            \"range\": {\r\n                \"from\": 500,\r\n                \"to\": 1500\r\n            }\r\n        },\r\n        { \r\n            \"id\": 7,\r\n            \"name\": \"Water\",\r\n            \"type\": \"COST\",\r\n            \"count\": 50,\r\n            \"range\": {\r\n                \"from\": 150,\r\n                \"to\": 300\r\n            }\r\n        },\r\n        { \r\n            \"id\": 8,\r\n            \"name\": \"Tax\",\r\n            \"type\": \"COST\",\r\n            \"count\": 1000,\r\n            \"range\": {\r\n                \"from\": 50,\r\n                \"to\": 500\r\n            }\r\n        },\r\n        { \r\n            \"id\": 9,\r\n            \"name\": \"Transport\",\r\n            \"type\": \"COST\",\r\n            \"count\": 1000,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 100\r\n            }\r\n        },\r\n        { \r\n            \"id\": 10,\r\n            \"name\": \"Food\",\r\n            \"type\": \"COST\",\r\n            \"count\": 1500,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 75\r\n            }\r\n        },\r\n        { \r\n            \"id\": 11,\r\n            \"name\": \"Reform\",\r\n            \"type\": \"COST\",\r\n            \"count\": 75,\r\n            \"range\": {\r\n                \"from\": 1000,\r\n                \"to\": 10000\r\n            }\r\n\r\n        },\r\n        { \r\n            \"id\": 12,\r\n            \"name\": \"Gifts\",\r\n            \"type\": \"COST\",\r\n            \"count\": 200,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 100\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{LOAD_DATA_ENDPOINT}}/"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const moment = require('moment');",
+					"",
+					"pm.globals.set('randomStatement', Math.floor(Math.random() * 12) + 1);",
+					"",
+					"function randomDate(start, end) {",
+					"  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));",
+					"}",
+					"",
+					"var date = randomDate(new Date(2020, 0, 1), new Date());",
+					"pm.globals.set('randomDatetime', date);",
+					"",
+					"pm.globals.set('randomDateStart', moment(date).format('DD/MM/YYYY'));",
+					"",
+					"function addDays(date, days) {",
+					"  var result = new Date(date);",
+					"  result.setDate(result.getDate() + days);",
+					"  return moment(result).format('DD/MM/YYYY');",
+					"}",
+					"",
+					"pm.globals.set('randomDateEnd', addDays(date, Math.floor(Math.random() * 30) + 1));",
+					"",
+					"pm.globals.set('randomReference', moment(date).format('MM/YYYY'));",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "WS_ENDPOINT",
+			"value": "https://examplesvb.execute-api.us-east-1.amazonaws.com/prod",
+			"type": "string"
+		},
+		{
+			"key": "X_API_KEY",
+			"value": "8bz1eYCa0Z1secretsecretsecretI9q3P0cvHlm",
+			"type": "string"
+		},
+		{
+			"key": "LOAD_DATA_ENDPOINT",
+			"value": "https://cfm2vj5kexampleexamplejham0uejrz.lambda-url.us-east-1.on.aws",
+			"type": "string"
+		}
+	]
+}
