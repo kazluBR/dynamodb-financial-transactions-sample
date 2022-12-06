@@ -6,6 +6,7 @@ AWS Black Belt - Database - Challenge 2022
 
 - Node 16.x
 - AWS Account
+- Postman Account
 
 ## ER Diagram
 
@@ -35,7 +36,7 @@ functions:
 
 ## Configuring Postman Collection
 
-- Download collection json from [here](/collection/financial-transactions.postman_collection.json)
+- Download collection json from [here](https://raw.githubusercontent.com/kazluBR/dynamodb-financial-transactions-sample/master/collection/financial-transactions.postman_collection.json)
 - Import this collection on your Postman
 - Fill in the variables with their respective values:
   ![alt text](/images/variables-postman-collection.png)
