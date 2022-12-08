@@ -142,7 +142,6 @@ export class Repository {
     };
     let items = [];
     let data = await docClient.scan(props).promise();
-    console.log(data);
     items = [...items, ...data.Items];
     while (typeof data.LastEvaluatedKey != "undefined") {
       props.ExclusiveStartKey = data.LastEvaluatedKey;

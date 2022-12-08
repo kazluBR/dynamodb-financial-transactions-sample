@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "ec4b0271-3fcf-4996-8f8c-1621b9802e73",
 		"name": "Financial Transactions",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24149835"
 	},
 	"item": [
@@ -34,7 +34,15 @@
 										"type": "text"
 									}
 								],
-								"url": "{{WS_ENDPOINT}}/statement"
+								"url": {
+									"raw": "{{WS_ENDPOINT}}/statement",
+									"host": [
+										"{{WS_ENDPOINT}}"
+									],
+									"path": [
+										"statement"
+									]
+								}
 							},
 							"response": []
 						},
@@ -51,14 +59,22 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": \"Credit Card\",\r\n    \"type\": \"INCOME\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Credit Card\",\r\n    \"type\": \"INCOME\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "{{WS_ENDPOINT}}/statement"
+								"url": {
+									"raw": "{{WS_ENDPOINT}}/statement",
+									"host": [
+										"{{WS_ENDPOINT}}"
+									],
+									"path": [
+										"statement"
+									]
+								}
 							},
 							"response": []
 						},
@@ -75,14 +91,22 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": \"5\",\r\n    \"name\": \"Payroll\",\r\n    \"type\": \"COST\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Payroll\",\r\n    \"type\": \"COST\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "{{WS_ENDPOINT}}/statement"
+								"url": {
+									"raw": "{{WS_ENDPOINT}}/statement",
+									"host": [
+										"{{WS_ENDPOINT}}"
+									],
+									"path": [
+										"statement"
+									]
+								}
 							},
 							"response": []
 						},
@@ -97,7 +121,16 @@
 										"type": "text"
 									}
 								],
-								"url": "{{WS_ENDPOINT}}/statement/1"
+								"url": {
+									"raw": "{{WS_ENDPOINT}}/statement/1",
+									"host": [
+										"{{WS_ENDPOINT}}"
+									],
+									"path": [
+										"statement",
+										"1"
+									]
+								}
 							},
 							"response": []
 						}
@@ -117,7 +150,15 @@
 										"type": "text"
 									}
 								],
-								"url": "{{WS_ENDPOINT}}/transaction"
+								"url": {
+									"raw": "{{WS_ENDPOINT}}/transaction",
+									"host": [
+										"{{WS_ENDPOINT}}"
+									],
+									"path": [
+										"transaction"
+									]
+								}
 							},
 							"response": []
 						},
@@ -141,7 +182,15 @@
 										}
 									}
 								},
-								"url": "{{WS_ENDPOINT}}/transaction"
+								"url": {
+									"raw": "{{WS_ENDPOINT}}/transaction",
+									"host": [
+										"{{WS_ENDPOINT}}"
+									],
+									"path": [
+										"transaction"
+									]
+								}
 							},
 							"response": []
 						},
@@ -156,7 +205,16 @@
 										"type": "text"
 									}
 								],
-								"url": "{{WS_ENDPOINT}}/transaction/4da1be0d-cdfa-4694-8333-78e14a417718"
+								"url": {
+									"raw": "{{WS_ENDPOINT}}/transaction/4da1be0d-cdfa-4694-8333-78e14a417718",
+									"host": [
+										"{{WS_ENDPOINT}}"
+									],
+									"path": [
+										"transaction",
+										"4da1be0d-cdfa-4694-8333-78e14a417718"
+									]
+								}
 							},
 							"response": []
 						},
@@ -171,7 +229,16 @@
 										"type": "text"
 									}
 								],
-								"url": "{{WS_ENDPOINT}}/transaction/e6961385-19f1-4463-8d89-4127547cd5a7"
+								"url": {
+									"raw": "{{WS_ENDPOINT}}/transaction/e6961385-19f1-4463-8d89-4127547cd5a7",
+									"host": [
+										"{{WS_ENDPOINT}}"
+									],
+									"path": [
+										"transaction",
+										"e6961385-19f1-4463-8d89-4127547cd5a7"
+									]
+								}
 							},
 							"response": []
 						}
@@ -253,14 +320,22 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"statements\": [\r\n        { \r\n            \"id\": 1,\r\n            \"name\": \"Credit Card\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 2500,\r\n            \"range\": {\r\n                \"from\": 50,\r\n                \"to\": 5000\r\n            }\r\n        },\r\n        { \r\n            \"id\": 2,\r\n            \"name\": \"Pix\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 1000,\r\n            \"range\": {\r\n                \"from\": 100,\r\n                \"to\": 2000\r\n            }\r\n        },\r\n        { \r\n            \"id\": 3,\r\n            \"name\": \"Invoice\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 2000,\r\n            \"range\": {\r\n                \"from\": 500,\r\n                \"to\": 10000\r\n            }\r\n        },\r\n        { \r\n            \"id\": 4,\r\n            \"name\": \"Cash\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 500,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 200\r\n            }\r\n        },\r\n        { \r\n            \"id\": 5,\r\n            \"name\": \"Payroll\",\r\n            \"type\": \"COST\",\r\n            \"count\": 200,\r\n            \"range\": {\r\n                \"from\": 1000,\r\n                \"to\": 10000\r\n            }\r\n        },\r\n        { \r\n            \"id\": 6,\r\n            \"name\": \"Energy\",\r\n            \"type\": \"COST\",\r\n            \"count\": 50,\r\n            \"range\": {\r\n                \"from\": 500,\r\n                \"to\": 1500\r\n            }\r\n        },\r\n        { \r\n            \"id\": 7,\r\n            \"name\": \"Water\",\r\n            \"type\": \"COST\",\r\n            \"count\": 50,\r\n            \"range\": {\r\n                \"from\": 150,\r\n                \"to\": 300\r\n            }\r\n        },\r\n        { \r\n            \"id\": 8,\r\n            \"name\": \"Tax\",\r\n            \"type\": \"COST\",\r\n            \"count\": 1000,\r\n            \"range\": {\r\n                \"from\": 50,\r\n                \"to\": 500\r\n            }\r\n        },\r\n        { \r\n            \"id\": 9,\r\n            \"name\": \"Transport\",\r\n            \"type\": \"COST\",\r\n            \"count\": 1000,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 100\r\n            }\r\n        },\r\n        { \r\n            \"id\": 10,\r\n            \"name\": \"Food\",\r\n            \"type\": \"COST\",\r\n            \"count\": 1500,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 75\r\n            }\r\n        },\r\n        { \r\n            \"id\": 11,\r\n            \"name\": \"Reform\",\r\n            \"type\": \"COST\",\r\n            \"count\": 75,\r\n            \"range\": {\r\n                \"from\": 1000,\r\n                \"to\": 10000\r\n            }\r\n\r\n        },\r\n        { \r\n            \"id\": 12,\r\n            \"name\": \"Gifts\",\r\n            \"type\": \"COST\",\r\n            \"count\": 200,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 100\r\n            }\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"reset\": 0,\r\n    \"statements\": [\r\n        { \r\n            \"name\": \"Credit Card\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 2500,\r\n            \"range\": {\r\n                \"from\": 50,\r\n                \"to\": 5000\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Pix\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 1000,\r\n            \"range\": {\r\n                \"from\": 100,\r\n                \"to\": 2000\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Invoice\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 2000,\r\n            \"range\": {\r\n                \"from\": 500,\r\n                \"to\": 10000\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Cash\",\r\n            \"type\": \"INCOME\",\r\n            \"count\": 500,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 200\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Payroll\",\r\n            \"type\": \"COST\",\r\n            \"count\": 200,\r\n            \"range\": {\r\n                \"from\": 1000,\r\n                \"to\": 10000\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Energy\",\r\n            \"type\": \"COST\",\r\n            \"count\": 50,\r\n            \"range\": {\r\n                \"from\": 500,\r\n                \"to\": 1500\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Water\",\r\n            \"type\": \"COST\",\r\n            \"count\": 50,\r\n            \"range\": {\r\n                \"from\": 150,\r\n                \"to\": 300\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Tax\",\r\n            \"type\": \"COST\",\r\n            \"count\": 1000,\r\n            \"range\": {\r\n                \"from\": 50,\r\n                \"to\": 500\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Transport\",\r\n            \"type\": \"COST\",\r\n            \"count\": 1000,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 100\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Food\",\r\n            \"type\": \"COST\",\r\n            \"count\": 1500,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 75\r\n            }\r\n        },\r\n        { \r\n            \"name\": \"Reform\",\r\n            \"type\": \"COST\",\r\n            \"count\": 75,\r\n            \"range\": {\r\n                \"from\": 1000,\r\n                \"to\": 10000\r\n            }\r\n\r\n        },\r\n        { \r\n            \"name\": \"Gifts\",\r\n            \"type\": \"COST\",\r\n            \"count\": 200,\r\n            \"range\": {\r\n                \"from\": 25,\r\n                \"to\": 100\r\n            }\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "{{LOAD_DATA_ENDPOINT}}/"
+				"url": {
+					"raw": "{{LOAD_DATA_ENDPOINT}}/",
+					"host": [
+						"{{LOAD_DATA_ENDPOINT}}"
+					],
+					"path": [
+						""
+					]
+				}
 			},
 			"response": []
 		}
@@ -273,13 +348,26 @@
 				"exec": [
 					"const moment = require('moment');",
 					"",
-					"pm.globals.set('randomStatement', Math.floor(Math.random() * 12) + 1);",
+					"var statements = [\"588e6624ab3866e80f32f68bc5af7796\", ",
+					"    \"851c3bb6ddcaa3c32a41e14c9eb4085f\", ",
+					"    \"95c1d24fb86ca7efcb8b10aca371e016\",",
+					"    \"f1d7835a4a8a48039ce33cae1158d396\",",
+					"    \"14b2154d8227028c6641a51108738418\",",
+					"    \"5671d803074870e460b14f9019117ce8\",",
+					"    \"6b9384012059520abb03fd7e37d1cf9f\",",
+					"    \"814fa778b446ec91e94a409d6eab22b9\",",
+					"    \"b4f128919cea955e8f2e2973e8d5e77a\",",
+					"    \"c97b987954765a7499f56717f35b9de6\",",
+					"    \"d55e7757293ecde305b05cc26af82763\",",
+					"    \"f47dfb1abc69688d63ee6f32753f1285\"]",
+					"",
+					"pm.globals.set('randomStatement', statements[Math.floor(Math.random() * 12)]);",
 					"",
 					"function randomDate(start, end) {",
 					"  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));",
 					"}",
 					"",
-					"var date = randomDate(new Date(2020, 0, 1), new Date());",
+					"var date = randomDate(new Date(2012, 0, 1), new Date());",
 					"pm.globals.set('randomDatetime', date);",
 					"",
 					"pm.globals.set('randomDateStart', moment(date).format('DD/MM/YYYY'));",
@@ -311,17 +399,17 @@
 	"variable": [
 		{
 			"key": "WS_ENDPOINT",
-			"value": "https://examplesvb.execute-api.us-east-1.amazonaws.com/prod",
+			"value": "",
 			"type": "string"
 		},
 		{
 			"key": "X_API_KEY",
-			"value": "8bz1eYCa0Z1secretsecretsecretI9q3P0cvHlm",
+			"value": "",
 			"type": "string"
 		},
 		{
 			"key": "LOAD_DATA_ENDPOINT",
-			"value": "https://cfm2vj5kexampleexamplejham0uejrz.lambda-url.us-east-1.on.aws",
+			"value": "",
 			"type": "string"
 		}
 	]
