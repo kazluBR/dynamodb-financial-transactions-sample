@@ -4,6 +4,7 @@ export async function main(event, context) {
   try {
     const bundle = new Bundle(event, context);
 
+    await bundle.checkAndResetDatabase();
     await bundle.createStatements();
     await bundle.createTransactions();
 

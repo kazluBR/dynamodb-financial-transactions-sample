@@ -4,7 +4,7 @@ description: Populate dynamo table with statements and transactions
 timeout: 900
 
 environment:
-  INITIAL_DATE: "01/01/2020"
+  INITIAL_DATE: "01/01/2012"
   FINANCIAL_TRANSACTIONS_TABLE_NAME: !Ref FinancialTransactionsTable
 
 url: true
@@ -13,5 +13,7 @@ iamRoleStatements:
   - Effect: Allow
     Action:
       - dynamodb:PutItem
+      - dynamodb:Scan
+      - dynamodb:DeleteItem
     Resource:
       - !GetAtt FinancialTransactionsTable.Arn

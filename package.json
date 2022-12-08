@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@vendia/serverless-express": "^4.10.1",
+    "crypto-js": "^4.1.1",
     "express": "^4.18.2",
     "moment": "^2.29.4",
     "moment-random": "^1.1.0",

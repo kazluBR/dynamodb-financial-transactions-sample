@@ -1,5 +1,6 @@
 import AWS from "aws-sdk";
 import moment from "moment";
+import md5 from "crypto-js/md5";
 
 const docClient = new AWS.DynamoDB.DocumentClient();
 
@@ -29,11 +30,12 @@ export class Repository {
   };
 
   static createStatement = async ({ content }) => {
+    const hashDigest = md5(content.name + content.type);
     const props = {
       TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
       Item: {
         pk: "Statement",
-        sk: `Statement#${content.id}`,
+        sk: `Statement#${hashDigest}`,
         name: content.name,
         type: content.type,
       },
@@ -132,6 +134,32 @@ export class Repository {
 
     let response = await docClient.query(props).promise();
     return response.Items;
+  };
+
+  static deleteAll = async () => {
+    const props = {
+      TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
+    };
+    let items = [];
+    let data = await docClient.scan(props).promise();
+    console.log(data);
+    items = [...items, ...data.Items];
+    while (typeof data.LastEvaluatedKey != "undefined") {
+      props.ExclusiveStartKey = data.LastEvaluatedKey;
+      data = await docClient.scan(props).promise();
+      items = [...items, ...data.Items];
+    }
+    for (let item of items) {
+      await docClient
+        .delete({
+          TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
+          Key: {
+            pk: item.pk,
+            sk: item.sk,
+          },
+        })
+        .promise();
+    }
   };
 }
 
