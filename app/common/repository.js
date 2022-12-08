@@ -111,8 +111,16 @@ export class Repository {
       ExpressionAttributeNames: { "#reference": "reference" },
     };
 
+    let items = [];
     let response = await docClient.query(props).promise();
-    return response.Items;
+    items = [...items, ...response.Items];
+    while (typeof response.LastEvaluatedKey != "undefined") {
+      props.ExclusiveStartKey = response.LastEvaluatedKey;
+      response = await docClient.query(props).promise();
+      items = [...items, ...response.Items];
+    }
+
+    return items;
   };
 
   static getTransactionsLazyByReference = async ({ params }) => {
@@ -129,13 +137,14 @@ export class Repository {
       },
       ExpressionAttributeNames: { "#timestamp": "timestamp" },
     };
+
     let items = [];
-    let data = await docClient.scan(props).promise();
-    items = [...items, ...data.Items];
-    while (typeof data.LastEvaluatedKey != "undefined") {
-      props.ExclusiveStartKey = data.LastEvaluatedKey;
-      data = await docClient.scan(props).promise();
-      items = [...items, ...data.Items];
+    let response = await docClient.scan(props).promise();
+    items = [...items, ...response.Items];
+    while (typeof response.LastEvaluatedKey != "undefined") {
+      props.ExclusiveStartKey = response.LastEvaluatedKey;
+      response = await docClient.scan(props).promise();
+      items = [...items, ...response.Items];
     }
 
     return items;
@@ -158,8 +167,16 @@ export class Repository {
       ExpressionAttributeNames: { "#timestamp": "timestamp" },
     };
 
+    let items = [];
     let response = await docClient.query(props).promise();
-    return response.Items;
+    items = [...items, ...response.Items];
+    while (typeof response.LastEvaluatedKey != "undefined") {
+      props.ExclusiveStartKey = response.LastEvaluatedKey;
+      response = await docClient.query(props).promise();
+      items = [...items, ...response.Items];
+    }
+
+    return items;
   };
 
   static getTransactionsLazyBetweenTimestamp = async ({ params }) => {
@@ -178,12 +195,12 @@ export class Repository {
     };
 
     let items = [];
-    let data = await docClient.scan(props).promise();
-    items = [...items, ...data.Items];
-    while (typeof data.LastEvaluatedKey != "undefined") {
-      props.ExclusiveStartKey = data.LastEvaluatedKey;
-      data = await docClient.scan(props).promise();
-      items = [...items, ...data.Items];
+    let response = await docClient.scan(props).promise();
+    items = [...items, ...response.Items];
+    while (typeof response.LastEvaluatedKey != "undefined") {
+      props.ExclusiveStartKey = response.LastEvaluatedKey;
+      response = await docClient.scan(props).promise();
+      items = [...items, ...response.Items];
     }
 
     return items;
