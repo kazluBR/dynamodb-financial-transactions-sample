@@ -129,9 +129,16 @@ export class Repository {
       },
       ExpressionAttributeNames: { "#timestamp": "timestamp" },
     };
+    let items = [];
+    let data = await docClient.scan(props).promise();
+    items = [...items, ...data.Items];
+    while (typeof data.LastEvaluatedKey != "undefined") {
+      props.ExclusiveStartKey = data.LastEvaluatedKey;
+      data = await docClient.scan(props).promise();
+      items = [...items, ...data.Items];
+    }
 
-    let response = await docClient.scan(props).promise();
-    return response.Items;
+    return items;
   };
 
   static getTransactionsBetweenTimestamp = async ({ params }) => {
@@ -170,8 +177,16 @@ export class Repository {
       ExpressionAttributeNames: { "#timestamp": "timestamp" },
     };
 
-    let response = await docClient.scan(props).promise();
-    return response.Items;
+    let items = [];
+    let data = await docClient.scan(props).promise();
+    items = [...items, ...data.Items];
+    while (typeof data.LastEvaluatedKey != "undefined") {
+      props.ExclusiveStartKey = data.LastEvaluatedKey;
+      data = await docClient.scan(props).promise();
+      items = [...items, ...data.Items];
+    }
+
+    return items;
   };
 
   static deleteAll = async () => {
