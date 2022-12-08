@@ -261,7 +261,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{WS_ENDPOINT}}/cashflow?start={{randomDateStart}}&end={{randomDateEnd}}",
+							"raw": "{{WS_ENDPOINT}}/cashflow?lazy=0&start={{randomDateStart}}&end={{randomDateEnd}}",
 							"host": [
 								"{{WS_ENDPOINT}}"
 							],
@@ -269,6 +269,10 @@
 								"cashflow"
 							],
 							"query": [
+								{
+									"key": "lazy",
+									"value": "0"
+								},
 								{
 									"key": "start",
 									"value": "{{randomDateStart}}"
@@ -294,7 +298,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{WS_ENDPOINT}}/summary?reference={{randomReference}}",
+							"raw": "{{WS_ENDPOINT}}/summary?lazy=0&reference={{randomReference}}",
 							"host": [
 								"{{WS_ENDPOINT}}"
 							],
@@ -302,6 +306,10 @@
 								"summary"
 							],
 							"query": [
+								{
+									"key": "lazy",
+									"value": "0"
+								},
 								{
 									"key": "reference",
 									"value": "{{randomReference}}"
