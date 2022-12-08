@@ -35,21 +35,19 @@ export class Utils {
 
   static getTransactionsProcessed = ({ transactions, statements }) => {
     let list = [];
-    transactions
-      .sort((a, b) => a.timestamp - b.timestamp)
-      .forEach((transaction) => {
-        let statement = statements.find(
-          (x) => x.sk === `Statement#${transaction.statement}`
-        );
-        let item = {
-          id: transaction.sk.replace("Transaction#", ""),
-          statement: statement.name,
-          type: statement.type,
-          value: transaction.value,
-          datetime: transaction.datetime,
-        };
-        list.push(item);
-      });
+    transactions.forEach((transaction) => {
+      let statement = statements.find(
+        (x) => x.sk === `Statement#${transaction.statement}`
+      );
+      let item = {
+        id: transaction.sk.replace("Transaction#", ""),
+        statement: statement.name,
+        type: statement.type,
+        value: transaction.value,
+        datetime: transaction.datetime,
+      };
+      list.push(item);
+    });
     return list;
   };
 

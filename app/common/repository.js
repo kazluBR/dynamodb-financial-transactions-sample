@@ -115,9 +115,28 @@ export class Repository {
     return response.Items;
   };
 
+  static getTransactionsLazyByReference = async ({ params }) => {
+    const start = moment(params.reference, "MM/YYYY");
+    const end = moment(params.reference, "MM/YYYY")
+      .add(1, "months")
+      .add(-1, "seconds");
+    const props = {
+      TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
+      FilterExpression: "#timestamp between :start and :end",
+      ExpressionAttributeValues: {
+        ":start": moment(start).valueOf(),
+        ":end": moment(end).valueOf(),
+      },
+      ExpressionAttributeNames: { "#timestamp": "timestamp" },
+    };
+
+    let response = await docClient.scan(props).promise();
+    return response.Items;
+  };
+
   static getTransactionsBetweenTimestamp = async ({ params }) => {
-    const start = moment(params.start, "DD-MM-YYYY");
-    const end = moment(params.end, "DD-MM-YYYY")
+    const start = moment(params.start, "DD/MM/YYYY");
+    const end = moment(params.end, "DD/MM/YYYY")
       .add(1, "days")
       .add(-1, "seconds");
     const props = {
@@ -133,6 +152,25 @@ export class Repository {
     };
 
     let response = await docClient.query(props).promise();
+    return response.Items;
+  };
+
+  static getTransactionsLazyBetweenTimestamp = async ({ params }) => {
+    const start = moment(params.start, "DD/MM/YYYY");
+    const end = moment(params.end, "DD/MM/YYYY")
+      .add(1, "days")
+      .add(-1, "seconds");
+    const props = {
+      TableName: process.env.FINANCIAL_TRANSACTIONS_TABLE_NAME,
+      FilterExpression: "#timestamp between :start and :end",
+      ExpressionAttributeValues: {
+        ":start": moment(start).valueOf(),
+        ":end": moment(end).valueOf(),
+      },
+      ExpressionAttributeNames: { "#timestamp": "timestamp" },
+    };
+
+    let response = await docClient.scan(props).promise();
     return response.Items;
   };
 

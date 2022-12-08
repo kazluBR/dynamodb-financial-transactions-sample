@@ -5,9 +5,17 @@ export class CashFlow {
   static main = async (req, res, next) => {
     try {
       const params = { ...req.params, ...(req.query || {}) };
-      let transactions = await Repository.getTransactionsBetweenTimestamp({
-        params,
-      });
+      let transactions = [];
+      if (params.lazy == "1") {
+        transactions = await Repository.getTransactionsLazyBetweenTimestamp({
+          params,
+        });
+        transactions = transactions.sort((a, b) => a.timestamp - b.timestamp);
+      } else {
+        transactions = await Repository.getTransactionsBetweenTimestamp({
+          params,
+        });
+      }
 
       let statements = await Repository.getStatements();
 

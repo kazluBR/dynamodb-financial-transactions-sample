@@ -5,9 +5,16 @@ export class Summary {
   static main = async (req, res, next) => {
     try {
       const params = { ...req.params, ...(req.query || {}) };
-      let transactions = await Repository.getTransactionsByReference({
-        params,
-      });
+      let transactions = [];
+      if (params.lazy == "1") {
+        transactions = await Repository.getTransactionsLazyByReference({
+          params,
+        });
+      } else {
+        transactions = await Repository.getTransactionsByReference({
+          params,
+        });
+      }
 
       let statements = await Repository.getStatements();
 
